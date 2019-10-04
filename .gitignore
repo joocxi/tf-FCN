@@ -1,2 +1,5 @@
 .env
 .idea
+data
+prepro
+*.pyc
