@@ -2,7 +2,7 @@ import os
 
 import tensorflow as tf
 
-from trainer import train
+from trainer import train, test_iterator
 from preprocess import preprocess
 
 flags = tf.flags
@@ -26,7 +26,6 @@ flags.DEFINE_integer("num_classes", len(class_list) + 1, "")
 prepro_dir = "prepro"
 log_dir = "log"
 
-# file
 train_record_file = os.path.join(prepro_dir, "train.tfrecords")
 val_record_file = os.path.join(prepro_dir, "val.tfrecords")
 data_csv = os.path.join(prepro_dir, "data.csv")
@@ -44,6 +43,12 @@ flags.DEFINE_string("data_csv", data_csv, "")
 flags.DEFINE_string("mode", "train", "train/preprocess")
 flags.DEFINE_integer("seed", 2019, "")
 
+# training config
+flags.DEFINE_integer("image_size", 512, "")
+flags.DEFINE_integer("batch_size", 10, "")
+flags.DEFINE_float("lr", 3e-4, "")
+flags.DEFINE_integer("shuffle_buffer", 100, "")
+
 
 if not os.path.exists(prepro_dir):
     os.makedirs(prepro_dir)
@@ -55,6 +60,13 @@ def main(_):
     config = flags.FLAGS
     if config.mode == "train":
         train(config)
+    elif config.mode == "debug":
+        config.train_steps = 1
+        config.val_steps = 1
+        config.batch_size = 2
+        train(config)
+    elif config.mode == "iter":
+        test_iterator(config)
     elif config.mode == "preprocess":
         preprocess(config)
 

@@ -1,6 +1,6 @@
 # Fully Convolutional Networks for Liver Segmentation
 
-In this project, we will experiment with training FCN models on a liver segmentation dataset provided by [IRCAD](https://www.ircad.fr/research/computer/)
+In this project, we experiment with training FCN models on a liver segmentation dataset provided by [IRCAD](https://www.ircad.fr/research/computer/)
 
 ## Set up
 ```bash
@@ -18,6 +18,10 @@ sh download.sh
 ### Preprocessing
 ```bash
 python run.py --mode preprocess
+```
+We use TensorFlow iterator to iterate over the dataset. To check `image` and `mask` shape, run the command below
+```bash
+python run.py --mode iter
 ```
 ### Training
 ```bash

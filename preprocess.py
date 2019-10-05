@@ -51,6 +51,8 @@ def build_features(data_df, record_file, config):
     for idx, row in tqdm(data_df.iterrows()):
 
         image_ds = dicom.read_file(row["Path"])
+
+        assert image_ds.pixel_array.dtype == np.int16
         image = image_ds.pixel_array.tostring()
 
         masks = []
@@ -75,6 +77,7 @@ def build_features(data_df, record_file, config):
 
         final_mask = sum(masks)
         assert set(np.unique(final_mask)).issubset(set(c for c in range(config.num_classes)))
+        assert final_mask.dtype == np.uint8
 
         mask = final_mask.tostring()
 
