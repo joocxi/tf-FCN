@@ -13,11 +13,15 @@ mask_dir = "MASKS_DICOM"
 mesh_dir = "MESHES_VTK"
 patient_dir = "PATIENT_DICOM"
 
+class_list = ["liver", "bone", "kidney"]
+
 flags.DEFINE_string("label_dir", label_dir, "")
 flags.DEFINE_string("mask_dir", mask_dir, "")
 flags.DEFINE_string("mesh_dir", mesh_dir, "")
 flags.DEFINE_string("patient_dir", patient_dir, "")
-flags.DEFINE_list("class_list", ["liver", "bone", "skin"], "")
+
+flags.DEFINE_list("class_list", class_list, "")
+flags.DEFINE_integer("num_classes", len(class_list) + 1, "")
 
 prepro_dir = "prepro"
 log_dir = "log"
