@@ -98,5 +98,8 @@ def write_records(data_df, config):
                                          test_size=0.2,
                                          random_state=config.seed)
 
+    print("Number of train samples: {}".format(len(train_df)))
+    print("Number of test samples: {}".format(len(test_df)))
+
     build_features(train_df, config.train_record_file, config)
     build_features(test_df, config.val_record_file, config)

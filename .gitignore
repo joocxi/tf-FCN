@@ -3,4 +3,5 @@
 .DS_Store
 data
 prepro
+log
 *.pyc

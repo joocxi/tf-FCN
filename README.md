@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 ## Download data
 ```bash
-sh download.sh
+sh scripts/download.sh
 ```
 
 ## Running
@@ -25,17 +25,18 @@ python run.py --mode iter
 ```
 ### Training
 ```bash
-
+python run.py --mode train
 ```
 
 ## Results
 
 ## TODOs
 - [x] Preprocessing
-- [ ] Building model
-- [ ] Training pipeline
+- [x] Building model
+- [x] Training pipeline
 - [ ] Augmentation
 - [ ] Visualization
+- [ ] TensorBoard
 
 **References**
 1.  Long et al. , Fully Convolutional Networks for Semantic Segmentation. ([arxiv](https://arxiv.org/pdf/1411.4038.pdf))
