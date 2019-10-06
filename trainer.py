@@ -79,9 +79,7 @@ def train(config):
 
         sess.run(tf.global_variables_initializer())
 
-        print("Config.checkpoint_dir is {}.")
         checkpoint_path = tf.train.latest_checkpoint(config.checkpoint_dir)
-        print("Checkpoint path is {}.".format(checkpoint_path))
         if checkpoint_path is None:
             tf.logging.info("No checkpoint found in: {} dir.".format(config.checkpoint_dir))
             tf.logging.info("Preparing pretrained VGG model in: {} dir.".
