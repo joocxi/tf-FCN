@@ -13,15 +13,15 @@ def preprocess(config):
     data = []
     parts = os.listdir(config.data_dir)
     for part in tqdm(parts):
-        label_dir = os.path.join(config.data_dir, part, config.label_dir)
+        patient_dir = os.path.join(config.data_dir, part, config.patient_dir)
         mask_dir = os.path.join(config.data_dir, part, config.mask_dir)
 
         available_masks = os.listdir(mask_dir)
 
-        for img_name in os.listdir(label_dir):
-            label_path = os.path.join(label_dir, img_name)
+        for img_name in os.listdir(patient_dir):
+            img_path = os.path.join(patient_dir, img_name)
             sample = {
-                "Path": label_path,
+                "Path": img_path,
             }
 
             for available_mask in available_masks:
