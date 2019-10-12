@@ -18,7 +18,7 @@ tf.logging.set_verbosity(tf.logging.INFO)
 
 def get_val_dataset(record_file, config):
 
-    parser = get_record_parser(config)
+    parser = get_record_parser(config, augment=False)
     dataset = tf.data.TFRecordDataset(record_file).\
         map(parser).\
         batch(1).\
@@ -29,7 +29,7 @@ def get_val_dataset(record_file, config):
 
 def get_train_dataset(record_file, config):
 
-    parser = get_record_parser(config)
+    parser = get_record_parser(config, augment=config.use_augment)
     dataset = tf.data.TFRecordDataset(record_file).\
         map(parser).\
         shuffle(config.shuffle_buffer, seed=config.seed).\

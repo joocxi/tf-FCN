@@ -42,10 +42,9 @@ class Model(object):
                 self.train_op = self.optimizer.minimize(self.loss, global_step=self.global_step)
 
     def ready(self):
-        x3 = tf.concat([self.x] * 3, axis=-1)
         with tf.variable_scope('vgg_16'):
             with slim.arg_scope(vgg.vgg_arg_scope()):
-                net = slim.repeat(x3, 2, slim.conv2d, 64, [3, 3], scope='conv1')
+                net = slim.repeat(self.x, 2, slim.conv2d, 64, [3, 3], scope='conv1')
                 net = slim.max_pool2d(net, [2, 2], scope='pool1')
                 net = slim.repeat(net, 2, slim.conv2d, 128, [3, 3], scope='conv2')
                 net = slim.max_pool2d(net, [2, 2], scope='pool2')

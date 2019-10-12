@@ -59,6 +59,7 @@ flags.DEFINE_integer("val_steps", 565, "")  # we have 565 test samples in our sp
 flags.DEFINE_integer("save_summary_period", 20, "")
 flags.DEFINE_integer("validation_period", 500, "")
 flags.DEFINE_integer("save_model_period", 500, "")
+flags.DEFINE_bool("use_augment", False, "")
 
 
 if not os.path.exists(prepro_dir):

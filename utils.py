@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 
 
-def get_record_parser(config):
+def get_record_parser(config, augment=False):
     def parser(example):
 
         features = {
@@ -21,6 +21,29 @@ def get_record_parser(config):
 
         image = tf.cast(image, tf.float32)
         mask = tf.cast(mask, tf.int32)
+
+        image = tf.concat([image] * 3, axis=-1)
+
+        if augment:
+            case = tf.random_uniform(maxval=4, dtype=tf.int32, shape=[])
+
+            def flip_lr(img): return tf.image.flip_left_right(img)
+
+            def flip_ud(img): return tf.image.flip_up_down(img)
+
+            def flip_rot(img): return tf.image.rot90(img)
+
+            image = tf.case([
+                (tf.equal(case, 0), lambda: flip_lr(image)),
+                (tf.equal(case, 1), lambda: flip_ud(image)),
+                (tf.equal(case, 2), lambda: flip_rot(image))],
+                default=lambda: image)
+
+            mask = tf.case([
+                (tf.equal(case, 0), lambda: flip_lr(mask)),
+                (tf.equal(case, 1), lambda: flip_ud(mask)),
+                (tf.equal(case, 2), lambda: flip_rot(mask))],
+                default=lambda: mask)
 
         return image, mask
 
