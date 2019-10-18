@@ -45,30 +45,19 @@ python run.py --mode predict
 ### TensorBoard
 #### No augmentation
 
-<div id="banner" style="overflow: hidden;justify-content:space-around;">
-    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
-        <img src="assets/train_loss.png">
-    </div>
-    <div class="" style="max-width: 100%;max-height: 100%;display: inline-block;">
-        <img src="assets/val_loss.png">
-    </div>
-    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
-        <img src="assets/val_iou.png">
-    </div>
-</div>
+<p float="left">
+  <img src="assets/train_loss.png" width="100" />
+  <img src="assets/val_loss.png" width="100" /> 
+  <img src="assets/val_iou.png" width="100" />
+</p>
 
 #### With augmentation
-<div id="banner" style="overflow: hidden;justify-content:space-around;">
-    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
-        <img src="assets/train_loss_aug.png">
-    </div>
-    <div class="" style="max-width: 100%;max-height: 100%;display: inline-block;">
-        <img src="assets/val_loss_aug.png">
-    </div>
-    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
-        <img src="assets/val_iou_aug.png">
-    </div>
-</div>
+
+<p float="left">
+  <img src="assets/train_loss_aug.png" width="100" />
+  <img src="assets/val_loss_aug.png" width="100" /> 
+  <img src="assets/val_iou_aug.png" width="100" />
+</p>
 
 ## TODOs
 - [x] Preprocessing
