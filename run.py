@@ -2,7 +2,7 @@ import os
 
 import tensorflow as tf
 
-from trainer import train, test_iterator
+from trainer import train, predict, test_iterator
 from preprocess import preprocess
 
 flags = tf.flags
@@ -27,6 +27,7 @@ prepro_dir = "prepro"
 log_dir = "log"
 checkpoint_dir = os.path.join(log_dir, "checkpoints")
 tensorboard_dir = os.path.join(log_dir, "tensorboard")
+out_dir = "out"
 
 train_record_file = os.path.join(prepro_dir, "train.tfrecords")
 val_record_file = os.path.join(prepro_dir, "val.tfrecords")
@@ -38,6 +39,7 @@ flags.DEFINE_string("data_dir", data_dir, "")
 flags.DEFINE_string("log_dir", log_dir, "")
 flags.DEFINE_string("checkpoint_dir", checkpoint_dir, "")
 flags.DEFINE_string("tensorboard_dir", tensorboard_dir, "")
+flags.DEFINE_string("out_dir", out_dir, "")
 
 # file config
 flags.DEFINE_string("train_record_file", train_record_file, "")
@@ -80,6 +82,8 @@ def main(_):
         config.validation_period = 1
         config.save_model_period = 2
         train(config)
+    elif config.mode == "predict":
+        predict(config)
     elif config.mode == "iter":
         test_iterator(config)
     elif config.mode == "preprocess":

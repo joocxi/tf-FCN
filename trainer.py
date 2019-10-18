@@ -7,6 +7,7 @@ import tensorflow as tf
 import numpy as np
 
 from tqdm import tqdm
+from matplotlib import pyplot as plt
 
 from utils import get_record_parser
 from model import Model
@@ -146,3 +147,41 @@ def train(config):
         writer.close()
 
         tf.logging.info("Training finished in {} minutes.".format(round((time() - start_time) / 60, 2)))
+
+
+def predict(config):
+
+    val_dataset = get_val_dataset(config.val_record_file, config)
+
+    val_iterator = val_dataset.make_one_shot_iterator()
+
+    fcn = Model(config, val_iterator)
+
+    sess_config = tf.ConfigProto(allow_soft_placement=True)
+    sess_config.gpu_options.allow_growth = True
+
+    with tf.Session(config=sess_config) as sess:
+        sess.run(tf.global_variables_initializer())
+        saver = tf.train.Saver()
+        saver.restore(sess, tf.train.latest_checkpoint(config.checkpoint_dir))
+
+        sess.run(tf.assign(fcn.is_train, tf.constant(False, dtype=tf.bool)))
+
+        out_dir = os.path.join(config.out_dir)
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+
+        for i in tqdm(range(config.val_steps)):
+            y, prediction = sess.run([fcn.y, fcn.predict])
+            prediction = np.squeeze(prediction, axis=0)
+            y = np.squeeze(y)
+
+            plt.figure()
+            plt.subplot(1, 2, 1, title="True mask")
+            plt.imshow(y)
+
+            plt.subplot(1, 2, 2, title="Predicted mask")
+            plt.imshow(prediction)
+            plt.savefig(os.path.join(out_dir,  "out_{}.png".format(i)), transparent=True)
+
+            plt.close()
