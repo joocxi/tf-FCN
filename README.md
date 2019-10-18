@@ -35,16 +35,48 @@ To train FCN models with default config, run
 ```bash
 python run.py --mode train
 ```
+### Prediction
+To predict output on the validation set, run
+```bash
+python run.py --mode predict
+```
 
-## Results
+
+### TensorBoard
+#### No augmentation
+
+<div id="banner" style="overflow: hidden;justify-content:space-around;">
+    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
+        <img src="assets/train_loss.png">
+    </div>
+    <div class="" style="max-width: 100%;max-height: 100%;display: inline-block;">
+        <img src="assets/val_loss.png">
+    </div>
+    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
+        <img src="assets/val_iou.png">
+    </div>
+</div>
+
+#### With augmentation
+<div id="banner" style="overflow: hidden;justify-content:space-around;">
+    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
+        <img src="assets/train_loss_aug.png">
+    </div>
+    <div class="" style="max-width: 100%;max-height: 100%;display: inline-block;">
+        <img src="assets/val_loss_aug.png">
+    </div>
+    <div class="" style="max-width: 20%;max-height: 20%;display: inline-block;">
+        <img src="assets/val_iou_aug.png">
+    </div>
+</div>
 
 ## TODOs
 - [x] Preprocessing
 - [x] Building model
 - [x] Training pipeline
-- [ ] Augmentation
-- [ ] Visualization
-- [ ] TensorBoard
+- [x] Augmentation
+- [x] Visualization
+- [x] TensorBoard
 
 **References**
 1.  Long et al. , Fully Convolutional Networks for Semantic Segmentation. ([arxiv](https://arxiv.org/pdf/1411.4038.pdf))
