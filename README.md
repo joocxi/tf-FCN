@@ -46,17 +46,17 @@ python run.py --mode predict
 #### No augmentation
 
 <p float="left">
-  <img src="assets/train_loss.png" width="100" />
-  <img src="assets/val_loss.png" width="100" /> 
-  <img src="assets/val_iou.png" width="100" />
+  <img src="assets/train_loss.png" width="260" />
+  <img src="assets/val_loss.png" width="260" /> 
+  <img src="assets/val_iou.png" width="260" />
 </p>
 
 #### With augmentation
 
 <p float="left">
-  <img src="assets/train_loss_aug.png" width="100" />
-  <img src="assets/val_loss_aug.png" width="100" /> 
-  <img src="assets/val_iou_aug.png" width="100" />
+  <img src="assets/train_loss_aug.png" width="260" />
+  <img src="assets/val_loss_aug.png" width="260" /> 
+  <img src="assets/val_iou_aug.png" width="260" />
 </p>
 
 ## TODOs
